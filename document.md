@@ -1,0 +1,51 @@
+# Overview of Application
+This application is a demonstration of a simple VPN. The client sends an encoded message to the VPN that contains the destination IP address, destination port number, and the message that the client wants to send to the destination server. The VPN receives this encoded message, decodes it to get the destination IP address, destination port number, and client's message. Then the VPN forwards this message to the server. Once the VPN receives a response from the server, it forwards this response back to the client.
+
+# Client -> VPN Message format
+<SERVER_IP>#<SERVER_PORT>#<message>
+
+# VPN -> Client Message Format
+VPN forwards the response from the server to the client. But if there is an error, such as invalid IP address or invalid port number, it sends an error message to the client.
+IP address error: "Invalid destination IP address: <SERVER_IP>"
+port number error: "Invalid destination port: <SERVER_PORT>"
+
+# Example Output
+(Server from Project 1 is used.)
+>> Client
+% python3 client.py --server_IP 127.0.0.1 --server_port 65432 --VPN_IP 127.0.0.1 --VPN_port 65433 --message "add_days 2000-01-01 30"
+client starting - connecting to VPN at IP 127.0.0.1 and port 65433
+Connection established with VPN
+Sending message '127.0.0.1#65432#add_days 2000-01-01 30' to VPN...
+message sent, waiting for reply
+Received response from VPN: The date after adding 30 days to 2000-01-01 is 2000-01-31.
+Client is done, exiting...
+
+>> VPN
+% python3 VPN.py --VPN_IP 127.0.0.1 --VPN_port 65433
+VPN starting - listening for connections at IP 127.0.0.1 and port 65433
+Connection established with client at ('127.0.0.1', 51008)
+Received client message: 127.0.0.1#65432#add_days 2000-01-01 30
+Parsing message...
+Destination IP address: 127.0.0.1
+Destination port: 65432
+Forwarding message to server at IP 127.0.0.1 and port 65432
+Connection established with server
+Sending message 'add_days 2000-01-01 30' to server...
+Received reply from server: The date after adding 30 days to 2000-01-01 is 2000-01-31.
+Forwarding reply to client...
+Reply forwarded to client
+Forwarding complete, closing connection with server and client
+
+# How the network layers are interacting when the server, VPN server, and client is run
+1. The client makes a TCP connection with the VPN server using the provided VPN_IP and VPN_PORT arguments.
+2. The client encodes the message in the format <SERVER_IP>#<SERVER_PORT>#<message> and sends it to the VPN server.
+3. The VPN server listens for connections at VPN_IP and VPN_PORT.
+4. Once the VPN server establishes a connection with the client, the VPN server decodes the encoded message from the client by parsing it and extracts the destination IP address, destination port number, and the client's message.
+5. The VPN server makes a TCP connection with the server using the extracted destination IP address (SERVER_IP) and destination port number (SERVER_PORT).
+6. The VPN server forwards the client's message to the server.
+7. The server sends a response back to the VPN server.
+8. The VPN server forwards the server's response to the client's message to the client.
+9. The VPN server closes connections with the server and the client.
+
+# Acknowledgements
+The foundational code for the client and the VPN server was provided by Instructor Williams.
