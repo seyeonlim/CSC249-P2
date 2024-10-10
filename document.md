@@ -2,7 +2,7 @@
 This application is a demonstration of a simple VPN. The client sends an encoded message to the VPN that contains the destination IP address, destination port number, and the message that the client wants to send to the destination server. The VPN receives this encoded message, decodes it to get the destination IP address, destination port number, and client's message. Then the VPN forwards this message to the server. Once the VPN receives a response from the server, it forwards this response back to the client.
 
 # Client -> VPN Message format
-<SERVER_IP>#<SERVER_PORT>#<message>
+<SERVER_IP>#<SERVER_PORT>#<MESSAGE>
 
 # VPN -> Client Message Format
 VPN forwards the response from the server to the client. But if there is an error, such as invalid IP address or invalid port number, it sends an error message to the client.
