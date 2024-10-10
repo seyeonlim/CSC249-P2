@@ -41,26 +41,3 @@ Forwarding reply to client...
 Reply forwarded to client
 
 Forwarding complete, closing connection with server and client
-
-# Server (example)
-% python3 server.py --server_IP 127.0.0.1 --server_port 65432
-
-server starting - listening for connections at IP 127.0.0.1 and port 65432
-
-Connection established with ('127.0.0.1', 51009)
-
-Received client message: add_days 2000-01-01 30
-
-Parsing message...
-
-Msg parsed and validity checked. Operation: add_days, Param1: 2000-01-01, Param2: 30
-
-Operation: add_days, Param1: 2000-01-01, Param2: 30
-
-Sending response to client...
-
-Response sent to client!
-
-Received empty input from client
-
-Server is done!
