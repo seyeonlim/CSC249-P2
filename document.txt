@@ -1,5 +1,7 @@
 # Overview of Application
-This application is a demonstration of a simple VPN. The client sends an encoded message to the VPN that contains the destination IP address, destination port number, and the message that the client wants to send to the destination server. The VPN receives this encoded message, decodes it to get the destination IP address, destination port number, and client's message. Then the VPN forwards this message to the server. Once the VPN receives a response from the server, it forwards this response back to the client.
+This application is a demonstration of a simple VPN. The client sends an encoded message to the VPN that contains the destination IP address, destination port number, and the message that the client wants to send to the destination server. 
+The VPN receives this encoded message, decodes it to get the destination IP address, destination port number, and client's message. 
+Then the VPN forwards this message to the server. Once the VPN receives a response from the server, it forwards this response back to the client.
 
 # Client -> VPN Message format
 <SERVER_IP>#<SERVER_PORT>#<message>
