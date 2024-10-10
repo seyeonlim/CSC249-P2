@@ -13,46 +13,27 @@ port number error: "Invalid destination port: <SERVER_PORT>"
 (Server from Project 1 is used.)
 ## Client 
 % python3 client.py --server_IP 127.0.0.1 --server_port 65432 --VPN_IP 127.0.0.1 --VPN_port 65433 --message "add_days 2000-01-01 30"
-
 client starting - connecting to VPN at IP 127.0.0.1 and port 65433
-
 Connection established with VPN
-
 Sending message '127.0.0.1#65432#add_days 2000-01-01 30' to VPN...
-
 message sent, waiting for reply
-
 Received response from VPN: The date after adding 30 days to 2000-01-01 is 2000-01-31.
-
 Client is done, exiting...
 
 ## VPN
 % python3 VPN.py --VPN_IP 127.0.0.1 --VPN_port 65433
-
 VPN starting - listening for connections at IP 127.0.0.1 and port 65433
-
 Connection established with client at ('127.0.0.1', 51008)
-
 Received client message: 127.0.0.1#65432#add_days 2000-01-01 30
-
 Parsing message...
-
 Destination IP address: 127.0.0.1
-
 Destination port: 65432
-
 Forwarding message to server at IP 127.0.0.1 and port 65432
-
 Connection established with server
-
 Sending message 'add_days 2000-01-01 30' to server...
-
 Received reply from server: The date after adding 30 days to 2000-01-01 is 2000-01-31.
-
 Forwarding reply to client...
-
 Reply forwarded to client
-
 Forwarding complete, closing connection with server and client
 
 # How the network layers are interacting when the server, VPN server, and client is run
